@@ -1,62 +1,100 @@
 version: '2.1'
 services:
   rabbitmq:
+    restart: always
     ports:
       - 5672:5672
 
   config:
+    restart: always
     build: config
     ports:
       - 8888:8888
 
   registry:
+    depends_on:
+      - config
+    restart: always
     build: registry
 
   gateway:
+    depends_on:
+      - config
+    restart: always
     build: gateway
 
   auth-service:
+    depends_on:
+      - config
+    restart: always
     build: auth-service
     ports:
       - 5000:5000
 
   auth-mongodb:
+    depends_on:
+      - config
+    restart: always
     build: mongodb
     ports:
       - 25000:27017
 
   account-service:
+    depends_on:
+      - config
+    restart: always
     build: account-service
     ports:
       - 6000:6000
 
   account-mongodb:
+    depends_on:
+      - config
+    restart: always
     build: mongodb
     ports:
       - 26000:27017
 
   statistics-service:
+    depends_on:
+      - config
+    restart: always
     build: statistics-service
     ports:
       - 7000:7000
 
   statistics-mongodb:
+    depends_on:
+      - config
+    restart: always
     build: mongodb
     ports:
       - 27000:27017
 
   notification-service:
+    depends_on:
+      - config
+    restart: always
     build: notification-service
     ports:
       - 8000:8000
 
   notification-mongodb:
+    depends_on:
+      - config
+    restart: always
     build: mongodb
     ports:
       - 28000:27017
 
   monitoring:
+    depends_on:
+      - config
+    restart: always
     build: monitoring
 
   turbine-stream-service:
+    depends_on:
+      - config
+    restart: always
     build: turbine-stream-service

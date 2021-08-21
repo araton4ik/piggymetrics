@@ -1,5 +1,4 @@
-FROM java:8-jre
-MAINTAINER Alexander Lukyanchikov <sqshq@sqshq.com>
+FROM amazoncorretto:11.0.12-alpine
 
 ADD ./target/config.jar /app/
 CMD ["java", "-Xmx200m", "-jar", "/app/config.jar"]
